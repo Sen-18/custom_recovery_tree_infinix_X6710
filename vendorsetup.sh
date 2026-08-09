@@ -1,5 +1,5 @@
 #
-#	This file is part lf the OrangeFox Recovery Project
+#	This file is part of the OrangeFox Recovery Project
 # 	Copyright (C) 2020-2021 The OrangeFox Recovery Project
 #
 #	OrangeFox is free software: you can redistribute it and/or modify
@@ -17,12 +17,12 @@
 #
 # 	Please maintain this if you use this script or any part of it
 #
-FDEVICE="X6710"
+FDEVICE="x6710"
 #set -o xtrace
 
 fox_get_target_device() {
 local chkdev=$(echo "$BASH_SOURCE" | grep -w $FDEVICE)
-   if [ -n "$chkdev" ]; then
+   if [ -n "$chkdev" ]; then 
       FOX_BUILD_DEVICE="$FDEVICE"
    else
       chkdev=$(set | grep BASH_ARGV | grep -w $FDEVICE)
@@ -40,13 +40,15 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
 
 
-    lunch twrp_$FDEVICE-eng
+
+
+	lunch twrp_$FDEVICE-eng
 	# let's see what are our build VARs
- 		if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
-		export | grep "FOX" >> $FOX_BUILD_LOG_FILE
-		export | grep "OF_" >> $FOX_BUILD_LOG_FILE
-		export | grep "TARGET_" >> $FOX_BUILD_LOG_FILE
-		export | grep "TW_" >> $FOX_BUILD_LOG_FILE
-		fi
+	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
+  	   export | grep "FOX" >> $FOX_BUILD_LOG_FILE
+  	   export | grep "OF_" >> $FOX_BUILD_LOG_FILE
+   	   export | grep "TARGET_" >> $FOX_BUILD_LOG_FILE
+  	   export | grep "TW_" >> $FOX_BUILD_LOG_FILE
+ 	fi
 fi
 #
